@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="CarService" class="beans.CarServiceImpl" autowire="byName" />
+<bean id="carDao" class = "beans.CarDaoInMemoryImpl">
+<property name="carsMap">
+<map>
+<entry key="1" value-ref="car1" />
+<entry key="2" value-ref="car2" />
+</map>
+</property>
+</bean>
+<bean id="CarDaoJdbc" class="beans.CarDaoJdbcImpl" />
+<bean id="carService" class = "beans.CarServiceImpl">
+<constructor-arg ref="carDao"/>
+</bean>
+
+<bean id="car1" class="beans.Car">
+<property name = "id" value="1" />
+<property name = "make" value="Chevy" />
+<property name = "model" value="Tahoe" />
+<property name = "year" value="2004"/>
+<property name = "sold" value="false"/>
+</bean>
+<bean id="car2" class="beans.Car">
+<property name = "id" value="2" />
+<property name = "make" value="Chevy" />
+<property name = "model" value="Malibu" />
+<property name = "year" value="2011"/>
+<property name = "sold" value="false"/>
+</bean>
+
+</beans>
